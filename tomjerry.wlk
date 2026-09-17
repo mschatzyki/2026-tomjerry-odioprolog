@@ -2,6 +2,7 @@ object casa {
 var property cuidador = tom
 var property quilombero = jerry
 var suciedad = 0
+
 method pasaElDia(){
     cuidador.limpiarCasa()
     if (cuidador.puedeSacarQuilombero(quilombero)) { 
@@ -24,6 +25,17 @@ method ensuciar(mugre) {
     suciedad += mugre
 }
 
+}
+
+object pandilla {
+    const miembros = [jerry, tuffy, jerry]
+    method velocidad() = miembros.map({miembro => miembro.velocidad()}).min() / 2
+    method haceQuilombo() {
+        miembros.forEach({miembro => miembro.haceQuilombo()})
+        if (miembros.size() > 3) {
+            casa.cuidador().interrumpirSueño()
+        }
+    }
 }
 
 object tom {
