@@ -1,0 +1,48 @@
+import tomjerry.*
+
+describe "Tests de la casa, Tom y sus amigos" {
+
+    test "Tom limpia la casa y logra sacar a Jerry durante el día" {
+        // Tom tiene 100 de energía, velocidad = 5 + (100/10) = 15
+        // Jerry tiene peso 5, velocidad = 10 - 5 = 5
+        casa.pasaElDia()
+        // Tom gasta 40 de energía (queda en 60)
+        assert.equals(60, tom.energia())
+        // Como la velocidad de Tom (15) es mayor a la de Jerry (5), Jerry es expulsado (quilombero = 0)
+        assert.equals(0, casa.quilombero())
+    }
+
+    test "Jerry hace quilombo durante la noche" {
+        casa.quilombero(jerry)
+        casa.pasaLaNoche()
+        // Tom duerme y recupera 50 de energía (100 + 50 = 150)
+        assert.equals(150, tom.energia())
+        // Jerry hace quilombo: ensucia 110 y roba comida (su peso pasa de 5 a 6)
+        assert.equals(110, casa.suciedad())
+    }
+
+    test "La pandilla calcula correctamente su velocidad" {
+        // Miembros: [jerry (vel 5), tuffy (vel 10), jerry (vel 5)]
+        // Velocidades: 5, 10, 5. El mínimo es 5.
+        // La velocidad de la pandilla es min / 2 = 5 / 2 = 2.5
+        assert.equals(2.5, pandilla.velocidad())
+    }
+
+    test "Robocat limpia toda la casa sin esfuerzo y saca al quilombero" {
+        casa.cuidador(robocat)
+        casa.ensuciar(500)
+        casa.pasaElDia()
+        // Robocat limpia todo (suciedad = 0)
+        // Nota: hay un detalle en el código original de robocat.puedeSacarQuilombero() que no recibe parámetros, 
+        // pero casa.pasaElDia() llama a cuidador.puedeSacarQuilombero(quilombero). 
+        // Asegurate de ajustar robocat.puedeSacarQuilombero(quilombero) si te arroja error de aridad en Wollok.
+        assert.equals(0, casa.suciedad())
+    }
+
+    test "Tuffy interrumpe el sueño de Tom al hacer quilombo" {
+        casa.quilombero(tuffy)
+        casa.pasaLaNoche()
+        // Tom duerme (+50) pero Tuffy interrumpe su sueño (-20). Energía final: 100 + 50 - 20 = 130
+        assert.equals(130, tom.energia())
+    }
+}

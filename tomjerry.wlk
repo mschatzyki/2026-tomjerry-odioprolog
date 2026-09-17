@@ -1,7 +1,9 @@
+
+// Integrantes : Matias Scahtzyki , Uriel Cwirenbaum, Valentin Degenaro, Tobias Isidro y Tiago Shebar 
 object casa {
 var property cuidador = tom
 var property quilombero = jerry
-var suciedad = 0
+var property suciedad = 0
 
 method pasaElDia(){
     cuidador.limpiarCasa()
@@ -77,10 +79,41 @@ object robocat {
     method limpiarCasa() {
         casa.limpiarTodo()
     }
-    method puedeSacarQuilombero() {
+    method puedeSacarQuilombero(quilombero) {
         return true
     }
     method duerme() {}
     method interrumpirSueño() {}
 }
 
+
+
+//nuevos cuidadores
+object sacho{
+    var property energia = 100
+    method limparCasa() {
+        casa.limpiar(1)
+        energia -= 90
+    }
+    method puedeSacarQuilombero(quilombero) = false  
+
+    method duerme(){
+        energia += 10000000000000000
+    }
+    method interrumpirSueño() {
+        energia -= 1
+    }
+
+}
+object urielCwirenbaum {
+     method velocidad() = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 
+       method haceQuilombo(){
+        casa.cuidador().interrumpirSueño()
+  }
+}
+
+
+
+
+//respuesta: las interfaces son la de la casa, pandilla, tom, jerry, tuffy, robocat, sacho y uriel .
+// podrian haber 2 clases la de los cuidadores y la de los quilomberos. 
